@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -28,6 +29,19 @@ module.exports = {
       	]	
       },
       {
+        test: /\.scss$/,
+        use: [
+          {loader: "style-loader"},
+          {loader: "css-loader"},
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require('sass')
+            }
+          }
+        ]
+      },
+      {
 				test: /\.(png|svg|jpg|gif)$/,
 				use: [
 				 'file-loader'
@@ -44,6 +58,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
+    }),
+    new webpack.DefinePlugin({
+      SITE_TRANSITION_DURATION: '5'
     })
   ],
   output: {
