@@ -8,9 +8,11 @@ body {
 	overflow: hidden;
 	margin: 0;
 	font-family: 'Default';
+	background-color: black;
 	#app {
+		animation-name: initialFadeIn;
+		animation-duration: 3s;
 		position: absolute;
-		background-color: black;
 	  height: 100%;
 	  width: 100%;
 	  .btn{
@@ -38,48 +40,56 @@ body {
 			background-image: url('./img/mainBackground.png');
 			z-index: 10;
 		}
-		.site-image{
+		.site-image, #hover-div{
 			position: absolute;
 			margin-left: auto;
 			margin-right: auto;
 			left: 0;
 			right: 0;
-			height: 100%;
-			width: 40%;
-	  	background-position: center top;
-			opacity: 0;
-			transition: opacity 1s, background-position 4s  2s;
-		  &.active{
-		  	opacity: 1;
-		  	background-position: center bottom;
-		  }
-			@media screen and (max-aspect-ratio: 8/5){
-				width: 64vh;
-			}
-		}
-		#hover-div{
-			opacity: 0;
-			transition: opacity .5s;
-			cursor: pointer;
-		  height: 25vw;
-		  z-index: 100;
-		  background-color: black;
-		  position: absolute;
-		  left: 0;
-		  right: 0;
-		  margin: auto;
-		  width: 40%;
 		  top: calc(50vh - 15.25vw);
+		  height: 25vw;
+			width: 40%;
+			opacity: 0;
 		  @media screen and (max-aspect-ratio: 8/5){
 				width: 64vh;
 				top: 25.6vh;
 				height: 39.3vh;
 			}
+		}
+		.site-image{
+	  	background-position: center top;
+			// transition: opacity 1s, background-position 4s  2s;
+		  &.active{
+		  	opacity: 1;
+		  	// background-position: center bottom;
+		  	animation-name: scrollDown;
+		  	animation-duration: 3s;
+		  }
+		  &.fade-in{
+		  	animation-name: fadeIn;
+		  	animation-duration: 1s;
+		  }
+		  &.fade-out{
+		  	animation-name: fadeOut;
+		  	animation-duration: 1s;
+		  	background-position: center center;
+		  }
+		}
+		#hover-div{
+			animation-name: hoverDivFadeOut;
+			animation-duration: 4s;
+			animation-delay: 1s;
+			transition: opacity .5s;
+			cursor: pointer;
+		  z-index: 100;
+		  background-color: black;
 			&:hover{
 				opacity: .5;
 			}
 		}
 		#contact-container {
+			animation: contactDivFadeIn;
+			animation-duration: 3s;
 		  position: absolute;
 		  // width: 50vw;
 		  // height: 80vh;
@@ -137,6 +147,46 @@ body {
 
 	}
 }
+
+@keyframes initialFadeIn{
+	0%{opacity:0;}
+	30%{opacity: 0;}
+	100%{opacity: 1;}
+}
+
+@keyframes hoverDivFadeOut{
+	0%{opacity: 1;}
+	40%{background-color: black;}
+	55%{background-color: #fff;}
+	75%{opacity: 1;background-color: #bbb;}
+	100%{opacity: 0;}
+}
+
+@keyframes contactDivFadeIn{
+	0%{opacity: 0;}
+	50%{opacity: 0;}
+	100%{opacity: 1;}
+}
+
+@keyframes scrollDown{
+	from{
+		background-position: center top;
+	}
+	to{
+		background-position: center center;
+	}
+}
+
+@keyframes fadeIn{
+	from{opacity: 0;}
+	to{opacity: 1;}
+}
+
+@keyframes fadeOut{
+	from{opacity: 1;}
+	to{opacity: 0;}
+}
+
 
 
 
