@@ -35,8 +35,10 @@ class App extends React.Component {
 		0);
 	}
 	startAnimation(){
-		var duration = Number(SITE_TRANSITION_DURATION) * 1000; //Uses a constant defined by wepack
-		var intervalId = setInterval(this.nextActiveImage, duration);
+		var scrollDuration = 3000;
+		var fadeDuration = 1000;
+		var intervalId = setInterval(() => this.animateSiteImages(scrollDuration, fadeDuration), fadeDuration + scrollDuration);
+
 		// store intervalId in the state so it can be accessed later:
 		this.setState({intervalId: intervalId});
 	}
@@ -44,11 +46,30 @@ class App extends React.Component {
 	  // use intervalId from the state to clear the interval
 		clearInterval(this.state.intervalId);
 	}
-	nextActiveImage(){
+	//Will be called every at the start of the "scroll" phase of each image animation
+	animateSiteImages(scrollDuration, fadeDuration){
+		//Set fadeIn image to active
+		//Unset the fade in and fade out images
+		
+		this.setState(state => ({
+					activeImageSrcIndex: state.fadeInImageSrcIndex !== false ? state.fadeInImageSrcIndex : state.activeImageSrcIndex,
+					fadeInImageSrcIndex: false,
+					fadeOutImageSrcIndex: false
+				}));
+		//Get src index of next image
+		var nextImgSrcIndex;
 		if (this.state.activeImageSrcIndex === this.state.siteImageSrcs.length - 1)
-			this.setState({activeImageSrcIndex: 0});
+			nextImgSrcIndex = 0;
 		else
-			this.setState({activeImageSrcIndex: ++this.state.activeImageSrcIndex});
+			nextImgSrcIndex = this.state.activeImageSrcIndex + 1;
+		//Set timeout for starting fade animation 
+		setTimeout(() => {
+			this.setState(state => ({
+							fadeInImageSrcIndex: nextImgSrcIndex,
+							fadeOutImageSrcIndex: state.activeImageSrcIndex,
+							activeImageSrcIndex: false
+						}));
+		}, scrollDuration);
 	}
 	openPortfolio(){
 		this.setState({
@@ -57,7 +78,10 @@ class App extends React.Component {
 	}
 	render() {
 		var siteImages = this.state.siteImageSrcs.map((src, i) => {
-			let className = 'site-image' + (i === this.state.activeImageSrcIndex ? ' active' : '');
+			let className = 'site-image';
+			if (i === this.state.activeImageSrcIndex) className += ' active';
+			else if (i === this.state.fadeInImageSrcIndex) className += ' fade-in';
+			else if (i === this.state.fadeOutImageSrcIndex) className += ' fade-out';
 			let style = `background-image: url('${src}')`;
 			return (
 				<div 

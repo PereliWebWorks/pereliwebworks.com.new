@@ -64,9 +64,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
-    }),
-    new webpack.DefinePlugin({
-      SITE_TRANSITION_DURATION: '5'
     })
   ],
   output: {
