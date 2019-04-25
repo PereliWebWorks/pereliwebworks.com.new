@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.scss';
 import ContactForm from './components/ContactForm';
+import Portfolio from './components/Portfolio';
 import sites from './sites.json';
 
 class App extends React.Component {
@@ -17,28 +18,27 @@ class App extends React.Component {
 
 		this.state = {
 			siteImageSrcs: sites.map(s => require('./img/site_screenshots/' + s.fileName)),
-			activeImageSrcIndex: 0,
-			mouseEntered: false
+			activeImageSrcIndex: false,
+			portfolioActive: false
 		};
 		this.nextActiveImage = this.nextActiveImage.bind(this);
-		this.onMouseEnter = this.onMouseEnter.bind(this);
-		this.onMouseLeave = this.onMouseLeave.bind(this);
 		this.startAnimation = this.startAnimation.bind(this);
+		this.openPortfolio = this.openPortfolio.bind(this);
 	}
 	componentDidMount() {
-		this.startAnimation();
+		setTimeout(() => {
+			this.setState({
+				activeImageSrcIndex: 0
+			});
+			this.startAnimation(); 
+		},
+		0);
 	}
 	startAnimation(){
 		var duration = Number(SITE_TRANSITION_DURATION) * 1000; //Uses a constant defined by wepack
 		var intervalId = setInterval(this.nextActiveImage, duration);
 		// store intervalId in the state so it can be accessed later:
 		this.setState({intervalId: intervalId});
-	}
-	onMouseEnter(){
-		clearInterval(this.state.intervalId);
-	}
-	onMouseLeave(){
-		this.startAnimation();
 	}
 	componentWillUnmount() {
 	  // use intervalId from the state to clear the interval
@@ -49,6 +49,11 @@ class App extends React.Component {
 			this.setState({activeImageSrcIndex: 0});
 		else
 			this.setState({activeImageSrcIndex: ++this.state.activeImageSrcIndex});
+	}
+	openPortfolio(){
+		this.setState({
+			portfolioActive: true
+		});
 	}
 	render() {
 		var siteImages = this.state.siteImageSrcs.map((src, i) => {
@@ -68,10 +73,16 @@ class App extends React.Component {
 				<ContactForm />
 				<div id="main-background"></div>
 				{siteImages}
-				<div id="hover-div"
-					onMouseEnter={this.onMouseEnter}
-					onMouseLeave={this.onMouseLeave}					
-				></div>
+				<div 
+					id="hover-div"
+					onClick={() => this.setState({portfolioActive: true})}
+				>
+					<h1>PORTFOLIO</h1>
+				</div>
+				<Portfolio 
+					active={this.state.portfolioActive} 
+					close={() => this.setState({portfolioActive: false})}
+				/>
 			</span>
 		);
 	}

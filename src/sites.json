@@ -1,11 +1,17 @@
 [
 	{
+		"name": "Silver Cloud Society",
+		"url": "http://silvercloudsociety.com",
 		"fileName": "silvercloudsociety.jpg" 
 	},
 	{
+		"name": "State Street Brats",
+		"url": "http://statestreetbrats.com",
 		"fileName": "statestreetbrats.jpg" 
 	},
 	{
+		"name": "Skin 608",
+		"url": "http://skin608.com",
 		"fileName": "skin608.jpg" 
 	}
 ]

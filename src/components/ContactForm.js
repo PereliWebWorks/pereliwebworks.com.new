@@ -6,24 +6,23 @@ export default class ContactForm extends React.Component{
 		this.state = {
 			contactDivActive: false
 		};
-		this.handleContactBtnClick = this.handleContactBtnClick.bind(this);
+		this.toggle = this.toggle.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-	handleContactBtnClick(e){
+	toggle(e){
 		e.preventDefault();
 		this.setState(state => ({
 			contactDivActive: !state.contactDivActive			
 		}));
 	}
-	handleSubmit(e){
+	handleSubmit(e) {
 		e.preventDefault();
 	}
 	render(){
 		let contactDivClassName = this.state.contactDivActive ? 'active' : '';
-		let linkText = this.state.contactDivActive ? '\u2190' : 'CONTACT';
 		return(
 			<div id="contact-container" className={contactDivClassName}>
-				<form>
+				<form onSubmit={this.handleSubmit}>
 					<div>
 						<input type="email" name="email" placeholder="Email" />
 					</div>
@@ -34,7 +33,8 @@ export default class ContactForm extends React.Component{
 						<input type="submit" className="btn" value="Submit" />
 					</div>
 				</form>
-				<a id="contact-btn" className="btn" onClick={this.handleContactBtnClick}>{linkText}</a>
+				<div id="contact-btn" className="btn" onClick={this.toggle}>CONTACT</div>
+				<div id="contact-close-btn" className="btn close-btn" onClick={this.toggle}>X</div>
 			</div>
 		);
 	}
