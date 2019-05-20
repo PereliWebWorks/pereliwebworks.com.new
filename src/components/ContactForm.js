@@ -1,4 +1,5 @@
 import React from 'react';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 
 export default class ContactForm extends React.Component{
 	constructor(){
@@ -33,8 +34,8 @@ export default class ContactForm extends React.Component{
 						<input type="submit" className="btn" value="Submit" />
 					</div>
 				</form>
-				<div id="contact-btn" className="btn open-btn" onClick={this.toggle}>CONTACT</div>
-				<div id="contact-close-btn" className="btn close-btn" onClick={this.toggle}>X</div>
+				<div id="contact-btn" className="btn open-btn" onClick={this.toggle}>CONTACT <Icon icon='envelope' /></div>
+				<div id="contact-close-btn" className="btn close-btn" onClick={this.toggle}><Icon icon='times' /></div>
 			</div>
 		);
 	}

@@ -5,6 +5,11 @@ import ContactForm from './components/ContactForm';
 import Portfolio from './components/Portfolio';
 import sites from './sites.json';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEnvelope, faArchive, faTimes } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faEnvelope, faArchive, faTimes);
+
 class App extends React.Component {
 	constructor(){
 		super();
