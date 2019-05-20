@@ -19,24 +19,25 @@ class App extends React.Component {
 		this.state = {
 			siteImageSrcs: sites.map(s => require('./img/site_screenshots/' + s.fileName)),
 			activeImageSrcIndex: false,
+			fadeInImageSrcIndex: false,
+			fadeOutImageSrcIndex: false,
 			portfolioActive: false
 		};
-		this.nextActiveImage = this.nextActiveImage.bind(this);
 		this.startAnimation = this.startAnimation.bind(this);
-		this.openPortfolio = this.openPortfolio.bind(this);
 	}
 	componentDidMount() {
 		setTimeout(() => {
 			this.setState({
-				activeImageSrcIndex: 0
+				fadeInImageSrcIndex: 0
 			});
 			this.startAnimation(); 
 		},
 		0);
 	}
 	startAnimation(){
-		var scrollDuration = 3000;
+		var scrollDuration = 4000;
 		var fadeDuration = 1000;
+		this.animateSiteImages(scrollDuration, fadeDuration); //First, call it immediately (setInterval waits to start)
 		var intervalId = setInterval(() => this.animateSiteImages(scrollDuration, fadeDuration), fadeDuration + scrollDuration);
 
 		// store intervalId in the state so it can be accessed later:
@@ -50,7 +51,6 @@ class App extends React.Component {
 	animateSiteImages(scrollDuration, fadeDuration){
 		//Set fadeIn image to active
 		//Unset the fade in and fade out images
-		
 		this.setState(state => ({
 					activeImageSrcIndex: state.fadeInImageSrcIndex !== false ? state.fadeInImageSrcIndex : state.activeImageSrcIndex,
 					fadeInImageSrcIndex: false,
@@ -71,11 +71,7 @@ class App extends React.Component {
 						}));
 		}, scrollDuration);
 	}
-	openPortfolio(){
-		this.setState({
-			portfolioActive: true
-		});
-	}
+	
 	render() {
 		var siteImages = this.state.siteImageSrcs.map((src, i) => {
 			let className = 'site-image';
@@ -105,7 +101,7 @@ class App extends React.Component {
 				</div>
 				<Portfolio 
 					active={this.state.portfolioActive} 
-					close={() => this.setState({portfolioActive: false})}
+					toggle={() => this.setState(state => ({portfolioActive: !state.portfolioActive}))}
 				/>
 			</span>
 		);

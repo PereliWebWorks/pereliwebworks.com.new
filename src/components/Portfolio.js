@@ -2,20 +2,21 @@ import React from 'react';
 import sites from '../sites.json';
 
 export default class Portfolio extends React.Component{
+
+
 	render(){
 		let className = this.props.active ? 'active' : '';
-		let siteElements = sites.map((s,i) => <li><a target="_blank" href={s.url} key={i}>{s.name}</a></li>);
+		let siteElements = sites.map((s,i) => <li key={i}><a target="_blank" href={s.url}>{s.name}</a></li>);
 		return(
 			<div 
 				id="portfolio-container" 
 				className={className}
-				onClick={this.props.close}
 			>
 				<div id="portfolio">
 					<ul>{siteElements}</ul>
 				</div>
-				<span className="btn close-btn"
-				>X</span>
+				<div id="portfolio-btn" className="btn open-btn" onClick={this.props.toggle}>PORTFOLIO</div>
+				<div id="portfolio-close-btn" className="btn close-btn" onClick={this.props.toggle}>X</div>
 			</div>
 		);
 	}

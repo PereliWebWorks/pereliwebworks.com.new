@@ -13,5 +13,20 @@
 		"name": "Skin 608",
 		"url": "http://skin608.com",
 		"fileName": "skin608.jpg" 
+	},
+	{
+		"name": "JCW Tax Accounting",
+		"url": "https://www.jcwtaxaccounting.com/",
+		"fileName": "jcwtaxaccounting.jpg" 
+	},
+	{
+		"name": "MIT Linq",
+		"url": "https://www.mitlinq.org/",
+		"fileName": "mitlinq.jpg" 
+	},
+	{
+		"name": "The Landing Apartments",
+		"url": "http://www.thelandingmadison.com/",
+		"fileName": "thelanding.jpg" 
 	}
 ]
