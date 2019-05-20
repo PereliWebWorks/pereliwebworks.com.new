@@ -94,6 +94,21 @@ $animationDuration: .5s;
 		font-size: 1.5em;
 		opacity: 0;
 		transition: opacity $animationDuration;
+    ul {
+      list-style-type: none;
+      padding: 0;    
+      .portfolio-item {
+        margin-bottom: .4em;
+        a {
+          color: #000;
+          transition: color .5s;
+          &:hover {
+            transition: color .1s;
+            color: #ddd;
+          }
+        }
+      }
+    }
 	}
 	&.active #portfolio{
 		opacity: 1;
@@ -104,3 +119,4 @@ $animationDuration: .5s;
 		transform-origin: bottom left;
 	}
 }
+
