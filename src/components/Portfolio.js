@@ -7,7 +7,7 @@ export default class Portfolio extends React.Component{
 
 	render(){
 		let className = this.props.active ? 'active' : '';
-		let siteElements = sites.map((s,i) => <li class="portfolio-item" key={i}><a target="_blank" href={s.url}>{s.name}</a></li>);
+		let siteElements = sites.map((s,i) => <li className="portfolio-item" key={i}><a target="_blank" href={s.url}>{s.name}</a></li>);
 		return(
 			<div 
 				id="portfolio-container" 

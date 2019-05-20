@@ -15,12 +15,12 @@
 	}
 }
 .site-image{
-	height: 100%;
-	background-position: center 0%;
+	// height: 100%;
+	background-position: center top;
 	background-size: cover;
   &.active{
   	opacity: 1;
-  	background-position: center 20%;
+  	background-position: center bottom;
   	transition: background-position 3s 1s;
   }
   &.fade-in{
@@ -29,7 +29,7 @@
   }
   &.fade-out{
   	opacity: 0;
-  	background-position: center 20%;
+  	background-position: center bottom;
   	transition: opacity 1s;
   }
 }

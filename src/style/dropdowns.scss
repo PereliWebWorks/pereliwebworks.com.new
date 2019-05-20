@@ -1,5 +1,5 @@
 $animationDuration: .5s;
-
+$scalingFactor: 10;
 
 #contact-container, #portfolio-container{
   position: absolute;
@@ -7,10 +7,10 @@ $animationDuration: .5s;
   transform-origin: top left;
   top: 0;			
   margin: 0;
-  width: 5vw;
+  width: 20vw;
   background-color: rgba(200,200,200,.6);
   padding: 2em;
-  transform: scaleY(.2);
+  transform: scaleY(1 / $scalingFactor);
   min-height: 150vh;
   transition: 
   	transform $animationDuration ease $animationDuration, 
@@ -30,7 +30,7 @@ $animationDuration: .5s;
 	  }
 	  .open-btn{
 	  	opacity: 0;
-	  	transition: opacity $animationDuration;
+	  	transition: opacity $animationDuration !important;
 	  }
 	  .close-btn{
 	  	opacity: 1;
@@ -38,12 +38,12 @@ $animationDuration: .5s;
 	  }
   }
   .open-btn{
-  	transform: scaleY(5);
+  	transform: scaleY($scalingFactor);
   	position: absolute;
   	display: block;
   	bottom: 25px;
   	opacity: 1;
-  	transition: opacity $animationDuration $animationDuration*2 ;
+  	transition: opacity $animationDuration ease $animationDuration*2 !important;
   }
   .close-btn{
   	position: absolute;
@@ -66,7 +66,8 @@ $animationDuration: .5s;
   form { 
   	opacity: 0;
   	transition: opacity $animationDuration ease;
-	  div {
+	  margin-top: 3em;
+    div {
   		margin: 1em;
 	  	input, textarea{
 	  		font-family: monospace;
