@@ -1,0 +1,53 @@
+$font: 'PantonNarrowDemo-Light';
+
+@font-face{
+	font-family: 'Default';
+	src: url('./fonts/panton/' + $font + '.otf');
+}
+
+html, body {
+	overflow: hidden;
+	position: relative;
+	height: 100%;
+}
+
+body {
+	animation-name: pageFadeIn;
+	animation-duration: 5s;
+	margin: 0;
+	font-family: 'Default';
+	background-color: black;
+	#app {
+		position: absolute;
+	  height: 100%;
+	  width: 100%;
+	  .btn{
+			cursor: pointer;
+		  text-decoration: none;
+	    background-color: rgb(10,10,10);
+		  color: #777;
+		  box-shadow: 0 0 5px rgba(0,0,0,.5);
+		  padding: .5em;
+		  border-radius: 5px;
+		  transition: font-size .5s;
+			&:hover{
+			  box-shadow: 0 0 10px rgba(0,0,0,.5);
+				font-size: 1.1em;
+			}
+	  }
+	  #main-background{
+			background-size: cover;
+			background-image: url('./img/mainBackground.png');
+	  }
+	}
+}
+
+
+@keyframes pageFadeIn{
+	0%{opacity: 0;}
+	30%{opacity: 0;}
+	100%{opacity: 1;}
+}
+
+
+
