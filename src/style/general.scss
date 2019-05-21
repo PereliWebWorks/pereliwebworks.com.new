@@ -49,6 +49,27 @@ body {
 	  	background-position: center center;
 			z-index: 10;
 		}
+		.message {
+			font-size: 1.5em;
+			padding: .5em;
+			border-radius: 5px;
+			&.hide {
+				opacity: 0;
+			}
+			&.fade-out{
+				animation: messageFadeOut 4s;
+				opacity: 0;
+			}
+			&.success {
+				background-color: rgba(0,200,0,.5);
+			}
+			&.error {
+				background-color: rgba(200,0,0,.5);
+			}
+			&.pending{
+				background-color: rgba(0,0,200,.5);
+			}
+		}
 	}
 }
 
@@ -60,4 +81,8 @@ body {
 }
 
 
-
+@keyframes messageFadeOut{
+	0% {opacity: 1;}
+	80% {opacity: 1;}
+	100% {opacity: 0;}
+}

@@ -5,24 +5,20 @@ import ContactForm from './components/ContactForm';
 import Portfolio from './components/Portfolio';
 import sites from './sites.json';
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEnvelope, faArchive, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEnvelope, faArchive, faTimes } from '@fortawesome/free-solid-svg-icons';
+
+import * as email from 'emailjs-com';
+email.init('user_p3U6yOeIFlL2D0yIjchi6');
 
 library.add(faEnvelope, faArchive, faTimes);
 
 class App extends React.Component {
 	constructor(){
 		super();
-		var siteImageElements = [];
-		sites.forEach((img, i) => {
-			let className = 'site-image';
-			let src = require('./img/site_screenshots/' + img.fileName);
-			let el = <img src={src} className={className} key={i} />
-			siteImageElements.push(el);
-		});
-
+		let siteImageSrcs = sites.filter(s => 'fileName' in s).map(s => require('./img/site_screenshots/' + s.fileName));
 		this.state = {
-			siteImageSrcs: sites.map(s => require('./img/site_screenshots/' + s.fileName)),
+			siteImageSrcs,
 			activeImageSrcIndex: false,
 			fadeInImageSrcIndex: false,
 			fadeOutImageSrcIndex: false,
